@@ -1,10 +1,10 @@
 ---
 development:
   dialect: postgres
-  database: email_development
-  user: postgres
-  password: postgres
-  host: 127.0.0.1
+  database: {{envOr "DATABASE" "postgres"}}
+  user: {{envOr "USER" "user"}}
+  password: {{envOr "PASSWORD" "pass"}}
+  host: {{envOr "HOST" "127.0.0.1"}}
   pool: 5
 
 test:

@@ -58,12 +58,13 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
-
 		app.GET("/", HomeHandler)
+		email := app.Group("/email")
+		email.GET("/", EmailHandler)
+		email.POST("/", EmailPostHandler)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
-
 	return app
 }
 
