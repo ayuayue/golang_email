@@ -1,0 +1,14 @@
+<div class="py-4 mb-2">
+  <h3 class="d-inline-block">发送邮件</h3>
+  <div class="alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      &times;
+    </button>
+    警告！请不要提交。
+  </div>
+</div>
+
+<%= formFor(receive, {action: mailsPath(), method: "POST"}) { %>
+  <%= partial("mails/form.html") %>
+  <%= linkTo(mailsPath(), {class: "btn btn-warning", "data-confirm": "Are you sure?", body: "Cancel"}) %>
+<% } %>

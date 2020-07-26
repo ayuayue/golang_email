@@ -1,0 +1,8 @@
+<div class="py-4 mb-2">
+  <h3 class="d-inline-block">Edit Mail</h3>
+</div>
+
+<%= formFor(mail, {action: mailPath({ mail_id: mail.ID }), method: "PUT"}) { %>
+  <%= partial("mails/form.html") %>
+  <%= linkTo(mailPath({ mail_id: mail.ID }), {class: "btn btn-warning", "data-confirm": "Are you sure?", body: "Cancel"}) %>
+<% } %>

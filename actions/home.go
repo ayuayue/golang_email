@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/gobuffalo/buffalo"
+	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/validate/v3"
 	"github.com/gobuffalo/validate/v3/validators"
 )
@@ -25,8 +26,31 @@ func Login(c buffalo.Context) error {
 func LoginAction(c buffalo.Context) error {
 	name := c.Param("name")
 	password := c.Param("password")
+	host := envy.Get("IMAP_HOST", "localhost")
+	port := envy.Get("IMAP_PORT", "")
 	fmt.Println(name, password)
-	return c.Redirect(302, "/login")
+	vrs := validate.Validate(
+		&validators.EmailIsPresent{Field: name, Name: "您的邮箱", Message: " .不合法. "},
+		&validators.EmailLike{Field: name, Name: "您的邮箱", Message: " .格式不正确. "},
+		&validators.StringIsPresent{Field: password, Name: "密码", Message: "不能为空"},
+	)
+	if vrs.HasAny() {
+		c.Set("errors", vrs.Errors)
+		c.Set("name", name)
+		c.Set("password", password)
+		return c.Render(200, r.HTML("login.html"))
+	}
+	ok := mailers.Connect(fmt.Sprintf("%s:%s", host, port), name, password)
+	if !ok {
+		c.Set("name", name)
+		c.Set("password", password)
+		c.Flash().Add("danger", fmt.Sprintf("%s", "登录失败"))
+		return c.Render(200, r.HTML("login.html"))
+	}
+	c.Session().Set("name", name)
+	c.Session().Set("password", password)
+	c.Flash().Add("success", "登录成功")
+	return c.Redirect(302, "/mails")
 }
 
 func Nologin(c buffalo.Context) error {
@@ -43,6 +67,8 @@ func NologinAction(c buffalo.Context) error {
 	vrs := validate.Validate(
 		&validators.EmailIsPresent{Field: name, Name: "您的邮箱", Message: " .不合法. "},
 		&validators.EmailLike{Field: name, Name: "您的邮箱", Message: " .格式不正确. "},
+		&validators.StringIsPresent{Field: content, Name: "内容", Message: "不能为空"},
+
 		&validators.EmailIsPresent{Field: to, Name: "收件人邮箱", Message: " .不合法. "},
 		&validators.EmailLike{Field: to, Name: "收件人邮箱", Message: " .格式不正确. "},
 	)
@@ -63,5 +89,11 @@ func NologinAction(c buffalo.Context) error {
 
 	}
 	c.Flash().Add("success", "邮件已发送!")
+	return c.Redirect(302, "/login")
+}
+
+func Logout(c buffalo.Context) error {
+	c.Flash().Clear()
+	c.Session().Clear()
 	return c.Redirect(302, "/login")
 }

@@ -8,19 +8,26 @@
                 登录后可以收发邮件,退出清除用户信息,不保留用户隐私信息<a href="<%= nologinPath() %>">免登录使用系统默认账号发送邮件</a>
             </div>
             <div class="card-header">
-                <h3>登录邮箱</h3>
+                <h5>登录邮箱(仅支持QQ邮箱)</h5>
             </div>
             <div class="card-body">
                 <form action="<%= loginPath() %>" method="POST" novalidate>
                     <input type="hidden" name="authenticity_token" value="<%= authenticity_token %>">
                     <div class="form-group">
                         <label for="email">邮箱账号: </label>
-                        <input type="email" name="name" class="form-control" id="email" value="<%= name %>">
+                        <input type="email" name="name" class="form-control" id="email" value="<%= name %>"  >
                     </div>
                     <div class="form-group">
                         <label for="password">邮箱密码: </label>
-                        <input type="password" name="password" class="form-control" id="password" value="<%= password %>">
+                        <input type="password" name="password" class="form-control" id="password" value="<%= password %>" placeholder="请输入授权码">
                         
+                    </div>
+                    <div class="form-group">
+                        <label for="password">登录方式: </label>
+                        <select name="" id="" class="form-control">
+                            <option value="">授权码登录</option>
+                        </select>
+                    
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">登录</button>

@@ -3,9 +3,9 @@ package email
 import (
 	"github.com/gobuffalo/buffalo"
 )
-var emailclient string
+
 func Receive(c buffalo.Context) error {
-	return c.Render(200, r.HTML("email.html"))
+	return c.Render(200, r.HTML("mails/index.html"))
 }
 func Send(c buffalo.Context) error {
 	return c.Render(200, r.HTML("email.html"))
