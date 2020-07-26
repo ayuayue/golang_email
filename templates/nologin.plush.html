@@ -1,0 +1,40 @@
+<div class="row mt-3 justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card">
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                需要收取信息请先<a href="<%= loginPath() %>">登录</a>
+            </div>
+            <div class="card-header">
+                <h3>发送邮件</h3>
+            </div>
+            <div class="card-body">
+                <form action="<%= nologinPath() %>" method="POST" novalidate>
+                    <input type="hidden" name="authenticity_token" value="<%= authenticity_token %>">
+                    <div class="form-group">
+                        <label for="email">您的邮箱账号: </label>
+                        <input type="email" name="name" class="form-control" id="email" value="<%= name %>"
+                            placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="to">收件人邮箱: </label>
+                        <input type="email" name="to" class="form-control" id="to" value="<%= to %>">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="content">邮件内容: </label>
+                        <textarea name="content" class="form-control" id="content"><%= content %></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">发送</button>
+                        <button type="reset" class="btn btn-warning">重置</button>
+
+                    </div>
+                </form>
+                <a href="https://github.com/ayuayue/golang_email">邮箱系统源码 </a>
+            </div>
+        </div>
+    </div>
+</div>

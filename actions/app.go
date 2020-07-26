@@ -1,13 +1,15 @@
 package actions
 
 import (
+	"eclient/actions/middlewares"
+	"eclient/actions/routes"
+	"eclient/models"
+
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
 	forcessl "github.com/gobuffalo/mw-forcessl"
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
 	"github.com/unrolled/secure"
-
-	"email/models"
 
 	"github.com/gobuffalo/buffalo-pop/v2/pop/popmw"
 	csrf "github.com/gobuffalo/mw-csrf"
@@ -58,10 +60,14 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
+		app.Use(middlewares.InputFilterMiddleware)
+
 		app.GET("/", HomeHandler)
-		email := app.Group("/email")
-		email.GET("/", EmailHandler)
-		email.POST("/", EmailPostHandler)
+		app.GET("/login",Login)
+		app.POST("/login",LoginAction)
+		app.GET("/nologin",Nologin)
+		app.POST("/nologin",NologinAction)
+		routes.WebRoutes(app)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}

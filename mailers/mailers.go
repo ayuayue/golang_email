@@ -1,6 +1,7 @@
 package mailers
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gobuffalo/buffalo/mail"
@@ -19,7 +20,7 @@ func init() {
 	host := envy.Get("SMTP_HOST", "localhost")
 	user := envy.Get("SMTP_USER", "")
 	password := envy.Get("SMTP_PASSWORD", "")
-
+	fmt.Println(port, host, user, password)
 	var err error
 	smtp, err = mail.NewSMTPSender(host, port, user, password)
 

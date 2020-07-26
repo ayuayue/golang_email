@@ -1,6 +1,6 @@
 ---
 development:
-  dialect: postgres
+  dialect: mysql
   database: {{envOr "DATABASE" "postgres"}}
   user: {{envOr "USER" "user"}}
   password: {{envOr "PASSWORD" "pass"}}

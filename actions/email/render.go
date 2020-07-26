@@ -1,4 +1,4 @@
-package actions
+package email
 
 import (
 	"html/template"
@@ -8,7 +8,7 @@ import (
 )
 
 var r *render.Engine
-var assetsBox = packr.New("app:assets", "../public")
+var assetsBox = packr.New("app:email:assets", "../public")
 
 func init() {
 	r = render.New(render.Options{
@@ -16,7 +16,7 @@ func init() {
 		HTMLLayout: "application.plush.html",
 
 		// Box containing all of the templates:
-		TemplatesBox: packr.New("app:templates", "../templates"),
+		TemplatesBox: packr.New("app:email:templates", "../templates"),
 		AssetsBox:    assetsBox,
 
 		// Add template helpers here:

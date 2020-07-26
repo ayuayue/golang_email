@@ -1,7 +1,7 @@
 package grifts
 
 import (
-	"email/actions"
+	"eclient/actions"
 
 	"github.com/gobuffalo/buffalo"
 )

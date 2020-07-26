@@ -1,9 +1,8 @@
 package main
 
 import (
+	"eclient/actions"
 	"log"
-
-	"email/actions"
 )
 
 // main is the starting point for your Buffalo application.
