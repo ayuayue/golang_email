@@ -7,7 +7,6 @@ tmp/
 node_modules/
 .sass-cache/
 *-packr.go
-public/assets/
 .vscode/
 .grifter/
 .env
@@ -27,3 +26,4 @@ generated/
 .idea/
 *.exe
 *.log
+.vscode/
