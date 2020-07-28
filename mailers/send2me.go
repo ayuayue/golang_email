@@ -8,7 +8,7 @@ import (
 	"github.com/gobuffalo/buffalo/render"
 	"github.com/gobuffalo/envy"
 )
-
+// DefaultSend 默认未登录时发送
 func DefaultSend(name, to, content string) error {
 	m := mail.NewMessage()
 	m.Subject = fmt.Sprintf("来自: %s", name)
@@ -25,7 +25,7 @@ func DefaultSend(name, to, content string) error {
 	}
 	return smtp.Send(m)
 }
-
+// SendByLogin 登录后发送邮件
 func SendByLogin(name, passwd, to, content string) error {
 	port := envy.Get("SMTP_PORT", "1025")
 	host := envy.Get("SMTP_HOST", "localhost")
@@ -41,13 +41,4 @@ func SendByLogin(name, passwd, to, content string) error {
 	return DefaultSend(name, to, content)
 }
 
-// func Login(name, passwd string) error {
-// 	port := envy.Get("SMTP_PORT", "1025")
-// 	host := envy.Get("SMTP_HOST", "localhost")
-// 	user := name
-// 	password := passwd
-// 	var err error
-// 	fmt.Println(port, host, user, password)
-// 	_, err = mail.NewSMTPSender(host, port, user, password)
-// 	return err
-// }
+

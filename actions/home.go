@@ -13,16 +13,16 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func HomeHandler(c buffalo.Context) error {
-	// return c.Redirect(302, "emailPath()")
+	// return c.Render(200,r.JSON(c))
 	return c.Render(200, r.HTML("index.html"))
 }
-
+// Login 登录页
 func Login(c buffalo.Context) error {
 	c.Set("name", "")
 	c.Set("password", "")
 	return c.Render(200, r.HTML("login.html"))
 }
-
+// LoginAction 登录逻辑处理
 func LoginAction(c buffalo.Context) error {
 	name := c.Param("name")
 	password := c.Param("password")
@@ -52,14 +52,14 @@ func LoginAction(c buffalo.Context) error {
 	c.Flash().Add("success", "登录成功")
 	return c.Redirect(302, "/mails")
 }
-
+// Nologin 免登录页
 func Nologin(c buffalo.Context) error {
 	c.Set("name", "")
 	c.Set("to", "1401262639@qq.com")
 	c.Set("content", "")
 	return c.Render(200, r.HTML("nologin.html"))
 }
-
+// NologinAction 免登录逻辑处理
 func NologinAction(c buffalo.Context) error {
 	name := c.Param("name")
 	to := c.Param("to")
@@ -91,7 +91,7 @@ func NologinAction(c buffalo.Context) error {
 	c.Flash().Add("success", "邮件已发送!")
 	return c.Redirect(302, "/login")
 }
-
+// Logout 退出
 func Logout(c buffalo.Context) error {
 	c.Flash().Clear()
 	c.Session().Clear()
