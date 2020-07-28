@@ -33,7 +33,9 @@ func Receive(c buffalo.Context) error {
 	name := c.Session().Get("name")
 	password := c.Session().Get("password")
 	msgAmount := c.Session().Get("msg_amount")
+	fmt.Println("======1")
 	mailAmount := mailers.GetMailNum(server, name.(string), password.(string))["INBOX"]
+	fmt.Println("======2")
 	if msgAmount != mailAmount {
 		mailItems = mailers.GerReceiveMail(host, port, name.(string), password.(string))
 		if mailItems == nil || len(mailItems) == 0 {

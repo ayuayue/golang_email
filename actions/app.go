@@ -59,7 +59,7 @@ func App() *buffalo.App {
 		// Setup and use translations:
 		app.Use(translations())
 		app.Use(middlewares.InputFilterMiddleware)
-		app.Use(middlewares.LoginMiddleware)
+
 		app.GET("/api", HomeHandler)
 		app.GET("/", Login)
 		app.GET("/login", Login)

@@ -3,6 +3,8 @@ package middlewares
 import (
 	// "fmt"
 
+	"fmt"
+
 	"github.com/gobuffalo/buffalo"
 )
 
@@ -10,9 +12,10 @@ import (
 func LoginMiddleware(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		// do some work before calling the next handler
-
-		if c.Session().Get("name") == "" || c.Session().Get("password") == "" {
+		fmt.Println(c.Session().Get("name"))
+		if c.Session().Get("name") == nil || c.Session().Get("password") == nil {
 			c.Flash().Add("warning", "用户信息已过期,请重新登录")
+			return c.Redirect(302, "/login")
 		}
 		err := next(c)
 		// do some work after calling the next handler
