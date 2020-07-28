@@ -16,7 +16,7 @@ func init() {
 		HTMLLayout: "application.plush.html",
 
 		// Box containing all of the templates:
-		TemplatesBox: packr.New("app:email:templates", "../templates"),
+		TemplatesBox: packr.New("app:email:templates", "../../templates/"),
 		AssetsBox:    assetsBox,
 
 		// Add template helpers here:

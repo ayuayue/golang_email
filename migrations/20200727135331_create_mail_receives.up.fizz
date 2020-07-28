@@ -1,0 +1,9 @@
+create_table("mail_receives") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("uid", "uuid", {})
+	t.Column("from", "string", {})
+	t.Column("to", "string", {})
+	t.Column("subject", "string", {})
+	t.Column("body", "string", {})
+	t.Column("attachment", "string", {})
+}

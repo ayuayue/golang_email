@@ -11,8 +11,6 @@ func WebRoutes(app *buffalo.App) {
 	em := app.Group("/mails")
 	em.GET("/", email.Receive)
 	em.GET("/index", email.Receive)
-	em.GET("/send", email.Receive)
-	em.GET("/send/index", email.Send)
-	em.GET("/send/create", email.SendCreateGet)
-	em.POST("/send/create", email.SendCreatePost)
+	em.GET("/send", email.Send)
+	em.POST("/send", email.SendAct)
 }
