@@ -1,3 +1,0 @@
-buffalo db g fizz mail/receive id:int uid:uuid from:string to:string subject:string body:string attachment:string 
-
-buffalo db g model mail/receive id:int uid:uuid from:string to:string subject:string body:string attachment:string --skip-migration

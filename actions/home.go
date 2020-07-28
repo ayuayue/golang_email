@@ -13,7 +13,6 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func HomeHandler(c buffalo.Context) error {
-	// return c.Render(200,r.JSON(c))
 	return c.Render(200, r.HTML("index.html"))
 }
 // Login 登录页
@@ -28,7 +27,6 @@ func LoginAction(c buffalo.Context) error {
 	password := c.Param("password")
 	host := envy.Get("IMAP_HOST", "localhost")
 	port := envy.Get("IMAP_PORT", "")
-	fmt.Println(name, password)
 	vrs := validate.Validate(
 		&validators.EmailIsPresent{Field: name, Name: "您的邮箱", Message: " .不合法. "},
 		&validators.EmailLike{Field: name, Name: "您的邮箱", Message: " .格式不正确. "},
@@ -93,7 +91,6 @@ func NologinAction(c buffalo.Context) error {
 }
 // Logout 退出
 func Logout(c buffalo.Context) error {
-	c.Flash().Clear()
 	c.Session().Clear()
 	return c.Redirect(302, "/login")
 }

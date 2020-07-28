@@ -15,15 +15,13 @@
 
 ### 使用方法 1 源码运行
 
-1. clone 下来,启动需要 `buffalo`的`cli`程序,[buffalo](https://github.com/gobuffalo/buffalo)
-2. 将 `.env.example` 文件更名为 `.env`
-   配置完成后使用 `buffalo dev` 即可启动服务,默认是 3000 端口,可在.`.env`文件中更改端口号
-3. 如想开启免登录,请先到 `.env` 文件中配置系统默认发件邮箱账号和授权码
-
+1. clone 下来,启动需要 `buffalo`的`cli`程序,[buffalo](https://github.com/gobuffalo/buffalo) 
+2. 如想开启免登录,请先到 `.env` 文件中配置系统默认发件邮箱账号和授权码
+3. 配置完成后使用 `buffalo dev` 即可启动服务,默认是 3000 端口,可在.`.env`文件中更改端口号
 ### 二进制文件运行
 
 1. 下载 release 页中的二进制文件
-2. 会自动生成`.env.example` 文件,和上面一样进行配置,
+2. 会自动生成`.env` 文件,和上面一样进行配置,
 3. 授予执行权限,终端运行
 
 #### 路由

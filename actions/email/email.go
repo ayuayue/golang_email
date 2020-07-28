@@ -27,17 +27,17 @@ type Msg struct {
 
 var mailItems []*mailers.MailItem
 var msgs []Msg
+
 // Receive 接受邮件处理
 func Receive(c buffalo.Context) error {
 	msg := Msg{}
 	name := c.Session().Get("name")
 	password := c.Session().Get("password")
 	msgAmount := c.Session().Get("msg_amount")
-	fmt.Println("======1")
 	mailAmount := mailers.GetMailNum(server, name.(string), password.(string))["INBOX"]
-	fmt.Println("======2")
-	if msgAmount != mailAmount {
+	if msgAmount != nil && msgAmount.(int) < mailAmount {
 		mailItems = mailers.GerReceiveMail(host, port, name.(string), password.(string))
+		msgs = []Msg{}
 		if mailItems == nil || len(mailItems) == 0 {
 			return errors.New("未接收到邮件，请检查邮箱配置或邮箱为空")
 		}
@@ -58,6 +58,7 @@ func Receive(c buffalo.Context) error {
 	return c.Render(200, r.HTML("/mails/index"))
 
 }
+
 // Send 发送邮件页
 func Send(c buffalo.Context) error {
 	c.Set("content", "")
@@ -65,6 +66,7 @@ func Send(c buffalo.Context) error {
 	return c.Render(200, r.HTML("/mails/new.plush.html"))
 
 }
+
 // SendAct 处理邮件发送
 func SendAct(c buffalo.Context) error {
 	to := c.Param("to")
