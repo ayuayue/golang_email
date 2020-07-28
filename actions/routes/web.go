@@ -9,6 +9,7 @@ import (
 
 // WebRoutes web路由
 func WebRoutes(app *buffalo.App) {
+	app.GET("/",email.Receive)
 	em := app.Group("/mails")
 	em.Use(middlewares.LoginMiddleware)
 

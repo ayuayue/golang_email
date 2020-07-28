@@ -61,7 +61,6 @@ func App() *buffalo.App {
 		app.Use(middlewares.InputFilterMiddleware)
 
 		app.GET("/api", HomeHandler)
-		app.GET("/", Login)
 		app.GET("/login", Login)
 		app.POST("/login", LoginAction)
 		app.GET("/nologin", Nologin)
