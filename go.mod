@@ -19,6 +19,6 @@ require (
 	github.com/gobuffalo/validate/v3 v3.1.0
 	github.com/markbates/grift v1.5.0
 	github.com/unrolled/secure v0.0.0-20190103195806-76e6d4e9b90c
-	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
-	golang.org/x/text v0.3.2
+	golang.org/x/net v0.7.0
+	golang.org/x/text v0.7.0
 )
